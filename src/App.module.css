@@ -4,3 +4,36 @@
   padding: 2rem;
   text-align: center;
 }
+
+.appContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 300px;
+}
+
+.searchInput {
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.addTodoInput {
+  margin-top: 30px;
+  width: 100%;
+}
+
+.todoItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.todoItem p {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.todoItemOptionsContainer {
+  display: flex;
+  flex-direction: column;
+}
