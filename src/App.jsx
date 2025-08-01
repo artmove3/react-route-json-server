@@ -108,6 +108,7 @@ function App() {
 						className={styles.searchInput}
 						type="text"
 						value={searchValue}
+						placeholder="Поиск начинается с трех символов"
 						onChange={({ target }) => searchInputHandler(target.value)}
 					/>
 				</div>
