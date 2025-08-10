@@ -1,4 +1,4 @@
-react app with json-server@0.17.4
+react app with json-server@0.17.4 and routing via react-router-dom
 
 https://github.com/typicode/json-server#readme
 
