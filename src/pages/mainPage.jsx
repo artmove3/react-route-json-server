@@ -77,7 +77,11 @@ export const MainPage = () => {
 					}
 				}}
 			/>
-			{newTodo.length > 0 && <p>чтобы добавить дело, нажми Enter</p>}
+			{newTodo.length > 0 && (
+				<p className={styles.newTodoInputHint}>
+					чтобы добавить дело, нажми Enter
+				</p>
+			)}
 			<button disabled={todos.length < 2} onClick={sortTodosButtonHandler}>
 				{isSorted ? 'Отменить сортировку' : 'По алфавиту'}
 			</button>

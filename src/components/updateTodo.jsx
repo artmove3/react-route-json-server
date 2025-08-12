@@ -13,13 +13,6 @@ export const updateTodo = (e, targetId, setIsUpdated, setCurrentUpdating) => {
 			}),
 		})
 			.then((response) => response.json())
-			// .then((updatedTodo) => {
-			// 	setTodos((prevTodos) =>
-			// 		prevTodos.map((todo) =>
-			// 			todo.id === updatedTodo.id ? updatedTodo : todo,
-			// 		),
-			// 	);
-			// })
 			.finally(() => {
 				setCurrentUpdating('');
 				setIsUpdated((prev) => !prev);
