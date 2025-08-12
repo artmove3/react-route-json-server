@@ -1,19 +1,15 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-
+import { useNavigate, useParams } from 'react-router-dom';
 import styles from '../App.module.css';
+import { updateTodo, deleteTodo } from '../components';
 
-export const TodoPage = ({ props }) => {
+export const TodoPage = () => {
 	const params = useParams();
 	const [todo, setTodo] = useState({});
 	const [isUpdated, setIsUpdated] = useState(false);
-	const {
-		currentUpdating,
-		deleteTodoButtonHandler,
-		updateButtonHandler,
-		setCurrentUpdating,
-		navigate,
-	} = props;
+	const [currentUpdating, setCurrentUpdating] = useState('');
+
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (params.id)
@@ -23,6 +19,14 @@ export const TodoPage = ({ props }) => {
 	}, [params.id, isUpdated]);
 
 	const { id, title } = todo;
+
+	const deleteTodoButtonHandler = (targetId) => {
+		deleteTodo(targetId, navigate);
+	};
+
+	const updateButtonHandler = (e, targetId) => {
+		updateTodo(e, targetId, setIsUpdated, setCurrentUpdating);
+	};
 
 	return (
 		<div className={styles.todoContainer}>
@@ -35,10 +39,9 @@ export const TodoPage = ({ props }) => {
 					<input
 						onKeyUp={(event) => {
 							updateButtonHandler(event, id);
-							setIsUpdated((prev) => !prev);
 						}}
 						placeholder="Нажми Enter, чтобы обновить"
-					></input>
+					/>
 				) : (
 					<button onClick={() => setCurrentUpdating(id)}>Обновить дело</button>
 				)}

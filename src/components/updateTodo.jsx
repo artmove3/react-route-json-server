@@ -1,4 +1,4 @@
-export const updateTodo = (e, targetId, setCurrentUpdating, setTodos, resetSearch) => {
+export const updateTodo = (e, targetId, setIsUpdated, setCurrentUpdating) => {
 	if (e.code === 'Enter') {
 		if (!e.target.value) {
 			setCurrentUpdating('');
@@ -13,16 +13,16 @@ export const updateTodo = (e, targetId, setCurrentUpdating, setTodos, resetSearc
 			}),
 		})
 			.then((response) => response.json())
-			.then((updatedTodo) => {
-				setTodos((prevTodos) =>
-					prevTodos.map((todo) =>
-						todo.id === updatedTodo.id ? updatedTodo : todo,
-					),
-				);
-			})
+			// .then((updatedTodo) => {
+			// 	setTodos((prevTodos) =>
+			// 		prevTodos.map((todo) =>
+			// 			todo.id === updatedTodo.id ? updatedTodo : todo,
+			// 		),
+			// 	);
+			// })
 			.finally(() => {
 				setCurrentUpdating('');
-				resetSearch();
+				setIsUpdated((prev) => !prev);
 			});
 	}
 };

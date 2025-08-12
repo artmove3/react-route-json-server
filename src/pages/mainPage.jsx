@@ -1,19 +1,37 @@
 import { NavLink } from 'react-router-dom';
 import styles from '../App.module.css';
 import { useState } from 'react';
+import { addTodo, useRequestGetTodos } from '../components';
 
-export const MainPage = ({ props }) => {
-	const {
-		todos,
-		findedTodos,
-		searchValue,
-		isSorted,
-		searchInputHandler,
-		addTodoButtonHandle,
-		sortTodosButtonHandler,
-	} = props;
-
+export const MainPage = () => {
+	const [todos, setTodos] = useState([]);
+	const [findedTodos, setFindedTodos] = useState([]);
+	const [searchValue, setSearchValue] = useState('');
 	const [newTodo, setNewTodo] = useState('');
+
+	const addTodoButtonHandle = (newTodoValue) =>
+		addTodo(newTodoValue, setTodos, resetSearch);
+
+	const searchInputHandler = (value) => {
+		setSearchValue(value);
+		if (value && value.length > 2) {
+			setFindedTodos(todos.filter((todo) => todo.title.includes(value)));
+		} else setFindedTodos([]);
+	};
+
+	const sortTodosButtonHandler = () => {
+		setIsSorted((prev) => !prev);
+		resetSearch();
+	};
+
+	const [isSorted, setIsSorted] = useState(false);
+
+	const resetSearch = () => {
+		setFindedTodos([]);
+		setSearchValue('');
+	};
+
+	useRequestGetTodos(setTodos, isSorted);
 
 	return (
 		<>
@@ -59,6 +77,7 @@ export const MainPage = ({ props }) => {
 					}
 				}}
 			/>
+			{newTodo.length > 0 && <p>чтобы добавить дело, нажми Enter</p>}
 			<button disabled={todos.length < 2} onClick={sortTodosButtonHandler}>
 				{isSorted ? 'Отменить сортировку' : 'По алфавиту'}
 			</button>
